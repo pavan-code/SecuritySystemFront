@@ -3,10 +3,9 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   constructor(private http: HttpClient) {}
 
   httpOptions = {
@@ -14,18 +13,27 @@ export class AuthService {
       Authorization: `Bearer ${localStorage.getItem('token')}`,
     }),
   };
-  baseURL: String = "https://8080-cdfbbaabecfdfadcdafcbbdbadcaafbdcb.examlyiopb.examly.io";
+  baseURL: String =
+    'https://8080-cdfbbaabecfdfadcdafcbbdbadcaafbdcb.examlyiopb.examly.io';
   isLoggedIn() {
-    const token = localStorage.getItem('token')
-    if(token)
-      return true;
-    else
-      return false;
+    const token = localStorage.getItem('token');
+    if (token) return true;
+    else return false;
   }
   login(data: any): Observable<any> {
-    return this.http.post(`${this.baseURL}/login`, data, this.httpOptions)
+    return this.http.post(`${this.baseURL}/login`, data, this.httpOptions);
   }
   register(data: any): Observable<any> {
-    return this.http.post(`${this.baseURL}/register`, data, this.httpOptions)
+    return this.http.post(`${this.baseURL}/register`, data, this.httpOptions);
+  }
+
+  didSetBankPassword(email: string) {
+    return this.http.get(`${this.baseURL}/isBankLocked?email=${email}`, this.httpOptions)
+  }
+  setBankPassword(data: any) {
+    return this.http.post(`${this.baseURL}/setBankPassword`, data, this.httpOptions)
+  }
+  checkBankPassword(data: any) {
+    return this.http.post(`${this.baseURL}/checkBankPassword`, data, this.httpOptions)
   }
 }

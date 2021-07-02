@@ -61,8 +61,10 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.login.value).subscribe(
       (res: any) => {
         console.log(res);
+        delete res.user.password;
         this.hide = true;
         localStorage.setItem('token', res.jwt)
+        localStorage.setItem('user', JSON.stringify(res.user))
         this.openSnackbar(res.message, '') 
         setTimeout(() => {
           location.href="home"

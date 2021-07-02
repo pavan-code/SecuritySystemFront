@@ -35,6 +35,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { SignupComponent } from './signup/signup.component';
+import { PasswordDialogComponent } from './password-dialog/password-dialog.component';
+import { SetPasswordDialogComponent } from './set-password-dialog/set-password-dialog.component';
+import { BankHomeComponent } from './bank-home/bank-home.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { SignupComponent } from './signup/signup.component';
     HomeComponent,
     FooterComponent,
     SignupComponent,
+    PasswordDialogComponent,
+    SetPasswordDialogComponent,
+    BankHomeComponent,
   ],
   imports: [
     BrowserModule,
