@@ -1,0 +1,47 @@
+<div class="container">
+    <div class="form" >
+        <h1>Register</h1>
+        <div class="spin" *ngIf = "!hide">
+            <mat-spinner diameter='100' strokeWidth='3'></mat-spinner>
+            <br>
+            <h3>Creating Account..</h3>
+        </div>
+        <form [formGroup]="register" *ngIf = "hide">
+            <mat-form-field appearance="outline">
+                <mat-label>Username</mat-label>
+                <input matInput type="text" name="username" id="username" formControlName="username">
+                <mat-error *ngIf = "formErrors.username">
+                    {{formErrors.username}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="text" name="email" id="email" formControlName="email">
+                <mat-error *ngIf = "formErrors.email">
+                    {{formErrors.email}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Mobile</mat-label>
+                <input matInput type="text" name="mobile" id="mobile" formControlName="mobile">          
+                <mat-error *ngIf = "formErrors.mobile">
+                    {{formErrors.mobile}}
+                </mat-error>
+                
+            </mat-form-field>
+            
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="password" id="password" formControlName="password">
+                <mat-error *ngIf = "formErrors.password">
+                    {{formErrors.password}}
+                </mat-error>
+            </mat-form-field>
+          
+            <div>
+                <span>Already registered? <a href="/login">Login here</a></span>
+            </div>
+            <button type="button" [disabled]="register.invalid" mat-raised-button color="primary" (click)="registerData()">Register</button>
+        </form>
+    </div>
+</div>

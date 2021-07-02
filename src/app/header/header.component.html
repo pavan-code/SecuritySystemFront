@@ -1,0 +1,15 @@
+
+<mat-toolbar color="primary">
+    
+    <button mat-button>Security System Management</button>
+    <span style="flex: 1 auto;"></span>
+   
+    <button *ngIf = "!show" routerLinkActive="active" mat-button routerLink='/signup'> Register</button>
+    <button *ngIf = "!show" routerLinkActive="active" mat-button routerLink='/login'>Login</button>
+    
+    
+    <button *ngIf = "show" mat-button (click) = "logout()">Logout</button>
+</mat-toolbar>
+<div class="banner">
+    
+</div>

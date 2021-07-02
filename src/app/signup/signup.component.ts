@@ -1,50 +1,57 @@
-import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-
+import { AuthService } from '../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss']
 })
-export class LoginComponent implements OnInit {
-  constructor(
-    private authService: AuthService,
-    private fb: FormBuilder,
-    private snackbar: MatSnackBar,
-    private router: Router
-  ) {}
+export class SignupComponent implements OnInit {
 
-  login!: FormGroup;
+  constructor( private authService: AuthService,
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar) { }
+
+  register!: FormGroup
   hide: boolean = true;
 
   ngOnInit(): void {
-   
     this.createForm();
   }
-
   createForm() {
-    this.login = this.fb.group({
+    this.register = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      mobile: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]]
     });
-    this.login.valueChanges.subscribe((data) => this.onValueChanged(data));
+    this.register.valueChanges.subscribe((data) => this.onValueChanged(data));
   }
   formErrors: any = {
+    username: '',
     email: '',
     password: '',
+    mobile: ''
   };
   validationMsgs: any = {
+    username: {
+      required: 'Username is required',
+      minlength: 'Atleast 5 characters long'
+    },
     email: {
       required: 'Email ID required',
       email: 'Enter a valid email ID'
     },
     password: {
       required: 'Password is required',
+      minlength: "Minimum 8 characters is required"
     },
+    mobile: {
+      required: 'Mobile number is required',
+      pattern: 'Enter a valid 10 digit number'
+    }
   };
   openSnackbar(message: string, action: string) {
     this.snackbar.open(message, action, {
@@ -54,28 +61,20 @@ export class LoginComponent implements OnInit {
       panelClass: ['success']
     });
   }
-
-  getLogin() {
-    console.log(this.login.value);
+  registerData() {
     this.hide = false;
-    this.authService.login(this.login.value).subscribe(
-      (res: any) => {
-        console.log(res);
-        this.hide = true;
-        localStorage.setItem('token', res.jwt)
-        this.openSnackbar(res.message, '') 
-        setTimeout(() => {
-          location.href="home"
-        }, 2500);    
-      },
-      (err) => console.log(err)
-    );
+    this.authService.register(this.register.value)
+    .subscribe((data: any) => {
+      this.hide = true;
+      console.log(data)
+
+    })
   }
-  onValueChanged(data?: any) {
-    if (!this.login) {
+  onValueChanged(_data?: any) {
+    if (!this.register) {
       return;
     }
-    const form = this.login;
+    const form = this.register;
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
         // clear previuos error messages if any
@@ -92,4 +91,5 @@ export class LoginComponent implements OnInit {
       }
     }
   }
+
 }
