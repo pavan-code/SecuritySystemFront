@@ -1,0 +1,107 @@
+<h1 mat-dialog-title><span *ngIf = "dialogdata.mode == 'add'">Add</span>
+    <span *ngIf = "dialogdata.mode == 'edit'">Update</span> Bank Account</h1>
+
+<mat-dialog-content>
+    <div class="spin" *ngIf = "hide">
+        <mat-spinner diameter="100" strokeWidth="4"></mat-spinner>
+        <br>
+        <p *ngIf = "dialogdata.mode == 'add'">Adding bank account..</p>
+        <p *ngIf = "dialogdata.mode == 'edit'">Updating bank account..</p>
+    </div>
+    <div class="form" *ngIf = "!hide">
+        <form action="" [formGroup]="addbank">
+            <div class="line" style="display: none;">
+                <mat-form-field appearance='outline'>
+                    <mat-label>Account Holder Name</mat-label>
+                    <input type="text" name="name" id="name" matInput readonly
+                    formControlName="holderName">
+                    <mat-error *ngIf="formErrors.holderName">
+                        {{formErrors.holderName}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance='outline'>
+                    <mat-label>Email</mat-label>
+                    <input type="email" name="email" id="email" matInput readonly
+                    formControlName="email">
+                    <mat-error *ngIf="formErrors.email">
+                        {{formErrors.email}}
+                    </mat-error>
+                </mat-form-field>
+    
+                
+            </div>
+
+            <div class="line">
+                <mat-form-field appearance='outline'>
+                    <mat-label>Bank Name</mat-label>
+                    <input type="text" name="bank" id="bank" matInput
+                    formControlName="bankName">
+                    <mat-error *ngIf="formErrors.bankName">
+                        {{formErrors.bankName}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field appearance='outline'>
+                    <mat-label>Account number</mat-label>
+                    <input type="text" name="accountNumber" id="accountNumber" matInput
+                    formControlName="accountNumber">
+                    <mat-error *ngIf="formErrors.accountNumber">
+                        {{formErrors.accountNumber}}
+                    </mat-error>
+                </mat-form-field>
+      
+            </div>
+
+            <div class="line">
+                
+                <mat-form-field appearance='outline'>
+                    <mat-label>IFSC code</mat-label>
+                    <input type="text" name="ifsccode" id="ifsccode" matInput
+                    formControlName="ifscCode">
+                    <mat-error *ngIf="formErrors.ifscCode">
+                        {{formErrors.ifscCode}}
+                    </mat-error>
+                </mat-form-field>  
+    
+                <mat-form-field appearance='outline'>
+                    <mat-label>Mobile</mat-label>
+                    <input type="text" name="mobile" id="mobile" matInput
+                    formControlName="mobile">
+                    <mat-error *ngIf="formErrors.mobile">
+                        {{formErrors.mobile}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+           
+            <div class="line">
+                <mat-form-field appearance='outline'>
+                    <mat-label>Branch</mat-label>
+                    <input type="text" name="branch" id="branch" matInput
+                    formControlName="branch">
+                    <mat-error *ngIf="formErrors.branch">
+                        {{formErrors.branch}}
+                    </mat-error>
+                </mat-form-field>
+    
+                <mat-form-field appearance='outline'>
+                    <mat-label>Address</mat-label>
+                    <input type="text" name="address" id="address" matInput
+                    formControlName="address">
+                    <mat-error *ngIf="formErrors.address">
+                        {{formErrors.address}}
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="buttons">
+                <button mat-dialog-close mat-button>close</button>
+                <button *ngIf = "dialogdata.mode == 'add'" [disabled]="addbank.invalid" 
+                type="button" mat-raised-button (click)="addAccount()" color="primary">
+                Add Account</button>
+                <button *ngIf = "dialogdata.mode == 'edit'" [disabled]="addbank.invalid" 
+                type="button" mat-raised-button (click)="updateAccount()" color="primary">
+                Update Account</button>
+            </div>
+            
+        </form>
+    </div>
+</mat-dialog-content>

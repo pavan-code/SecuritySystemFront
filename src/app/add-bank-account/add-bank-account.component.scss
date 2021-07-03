@@ -1,0 +1,34 @@
+.form {
+    .line {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        mat-form-field {
+            width: 48%;
+        }
+    }
+    .buttons {
+        float: right;
+    }
+}
+.spin {
+    text-align: center;
+    font-size: large;
+    mat-spinner {
+        margin: 10px auto;
+    }
+}
+@media screen and (max-width: 768px) {
+    .form {
+        form {
+            .line {
+                display: flex;
+                flex-direction: column;
+                mat-form-field {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, OnDestroy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from '../services/auth.service';
   templateUrl: './password-dialog.component.html',
   styleUrls: ['./password-dialog.component.scss']
 })
-export class PasswordDialogComponent implements OnInit {
+export class PasswordDialogComponent implements OnInit, OnDestroy {
   checked: boolean = false;
   type: string = "password";
 
@@ -18,13 +18,18 @@ export class PasswordDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<PasswordDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any) { 
       this.email = data.email
+      this.invokedBy = data.invoke
     }
 
   getpassword!: FormGroup;
   email: string = ""
-
+  invokedBy: string = ""
+  
   ngOnInit(): void {
     this.createForm();
+  }
+  ngOnDestroy(): void {
+    // alert('destroyed')
   }
   formErrors:any  = {
     'password': '',
@@ -82,16 +87,29 @@ export class PasswordDialogComponent implements OnInit {
       email: this.email,
       password: this.getpassword.value.password
     }
-    this.authService.checkBankPassword(data)
-    .subscribe((data: any) => {
-      console.log(data)
-      if(data) {        
-        this.dialogRef.close(data)
-      } else {
-        this.openSnackbar("Incorrect Password!")
-        this.ngOnInit();
-      }
-    })
+    if(this.invokedBy == 'bank') {
+      this.authService.checkBankPassword(data)
+      .subscribe((data: any) => {
+        // console.log(data)
+        if(data) {        
+          this.dialogRef.close(data)
+        } else {
+          this.openSnackbar("Incorrect Password!")
+          this.ngOnInit();
+        }
+      })
+    } else {
+      this.authService.checkMediaPassword(data)
+      .subscribe((data: any) => {
+        // console.log(data)
+        if(data) {        
+          this.dialogRef.close(data)
+        } else {
+          this.openSnackbar("Incorrect Password!")
+          this.ngOnInit();
+        }
+      })
+    }
   }
 
 }
