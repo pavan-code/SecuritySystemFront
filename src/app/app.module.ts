@@ -38,6 +38,8 @@ import { SignupComponent } from './signup/signup.component';
 import { PasswordDialogComponent } from './password-dialog/password-dialog.component';
 import { SetPasswordDialogComponent } from './set-password-dialog/set-password-dialog.component';
 import { BankHomeComponent } from './bank-home/bank-home.component';
+import { MediaHomeComponent } from './media-home/media-home.component';
+import { AddBankAccountComponent } from './add-bank-account/add-bank-account.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { BankHomeComponent } from './bank-home/bank-home.component';
     PasswordDialogComponent,
     SetPasswordDialogComponent,
     BankHomeComponent,
+    MediaHomeComponent,
+    AddBankAccountComponent,
   ],
   imports: [
     BrowserModule,

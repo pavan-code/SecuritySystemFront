@@ -1,1 +1,68 @@
-<p>bank-home works!</p>
+<div class="container">
+    <h1>Bank Information Locker</h1>
+    <hr>
+    <div class="spin" *ngIf="hide">
+        <mat-spinner diameter="100" strokeWidth="4"></mat-spinner>
+        <br>
+        <p>Getting all Bank Accounts..</p>
+    </div>
+    <div class="accounts" *ngIf="!hide">
+        <button mat-stroked-button (click)="addAccount()" color="primary"> <mat-icon>add</mat-icon> Add Bank Account</button>
+        <br><br>
+        <div *ngIf = "accounts.length == 0">
+            <h2>No Bank Accounts added</h2>
+        </div>
+        <table class="mat-elevation-z8" mat-table [dataSource]='accounts' *ngIf = "accounts.length > 0">
+            <ng-container matColumnDef = 'index' >
+                <th mat-header-cell *matHeaderCellDef> S.no</th>
+                <td mat-cell data-label="S. No" *matCellDef = 'let account; let i=index;'>  {{i+1}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'holdername' >
+                <th mat-header-cell *matHeaderCellDef> Holder Name</th>
+                <td mat-cell data-label="Holder name" *matCellDef = 'let account'>  {{account.holderName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'bankname' >
+                <th mat-header-cell *matHeaderCellDef> Bank Name</th>
+                <td mat-cell data-label="Bank name" *matCellDef = 'let account'>  {{account.bankName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'accountno' >
+                <th mat-header-cell *matHeaderCellDef> Account No. </th>
+                <td mat-cell data-label="Account No." *matCellDef = 'let account'>  {{account.accountNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'ifsccode' >
+                <th mat-header-cell *matHeaderCellDef> IFSC code </th>
+                <td mat-cell data-label="IFSC code" *matCellDef = 'let account'>  {{account.ifscCode}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'email' >
+                <th mat-header-cell *matHeaderCellDef> Email </th>
+                <td mat-cell data-label="Email" *matCellDef = 'let account'>  {{account.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'mobile' >
+                <th mat-header-cell *matHeaderCellDef> Mobile No. </th>
+                <td mat-cell data-label="Mobile No." *matCellDef = 'let account'>  {{account.accountNumber}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'address' >
+                <th mat-header-cell *matHeaderCellDef> Address </th>
+                <td mat-cell data-label="Address" *matCellDef = 'let account'>  {{account.address}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef = 'actions' >
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell data-label="Actions" *matCellDef = 'let account; let i=index;'> 
+                    <button mat-stroked-button (click)="update(account)"><mat-icon>edit</mat-icon> Edit</button>
+                    <button mat-button color='warn' (click)="delete(account.id)"><mat-icon>cancel</mat-icon> Delete</button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef='displayedColumns'></tr>
+            <tr mat-row *matRowDef='let row; columns: displayedColumns; let i=index;'></tr>
+        </table>
+    </div>
+</div>

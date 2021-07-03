@@ -7,35 +7,38 @@ import { AuthService } from '../services/auth.service';
 @Component({
   selector: 'app-set-password-dialog',
   templateUrl: './set-password-dialog.component.html',
-  styleUrls: ['./set-password-dialog.component.scss']
+  styleUrls: ['./set-password-dialog.component.scss'],
 })
 export class SetPasswordDialogComponent implements OnInit {
-
-  constructor(private fb: FormBuilder, private snackbar: MatSnackBar,
+  constructor(
+    private fb: FormBuilder,
+    private snackbar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private dialogRef: MatDialogRef<SetPasswordDialogComponent>,
-    private authService: AuthService) {
-      this.email = data.email
-     }
+    private authService: AuthService
+  ) {
+    this.email = data.email;
+    this.invokedBy = data.invoke;
+  }
   setpassword!: FormGroup;
   email: any;
+  invokedBy: string = '';
   checked: boolean = false;
-  type: string = "password"
+  type: string = 'password';
 
-  formErrors:any  = {
-    'password': '',
-    'confirm': ''
-  }
+  formErrors: any = {
+    password: '',
+    confirm: '',
+  };
   validationMsgs: any = {
-    'password': {
-      'required': 'Password is required',
-      'minlength': 'Password should be atleast 8 characaters long'
+    password: {
+      required: 'Password is required',
+      minlength: 'Password should be atleast 8 characaters long',
     },
-    'confirm': {
-      'required': 'Please confirm your password',
-      
-    }
-  }
+    confirm: {
+      required: 'Please confirm your password',
+    },
+  };
   ngOnInit(): void {
     this.createForm();
   }
@@ -43,8 +46,10 @@ export class SetPasswordDialogComponent implements OnInit {
     this.setpassword = this.fb.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
       // confirm: ['', Validators.required]
-    })
-    this.setpassword.valueChanges.subscribe(data => this.onValueChanged(data))
+    });
+    this.setpassword.valueChanges.subscribe((data) =>
+      this.onValueChanged(data)
+    );
   }
   onValueChanged(data?: any) {
     if (!this.setpassword) {
@@ -68,29 +73,39 @@ export class SetPasswordDialogComponent implements OnInit {
     }
   }
   changed(event: any) {
-    this.checked = event.checked
-    if(this.checked)
-      this.type = "text"
-    else
-      this.type = "password"
+    this.checked = event.checked;
+    if (this.checked) this.type = 'text';
+    else this.type = 'password';
   }
   openSnackbar(message: string) {
     this.snackbar.open(message, '', {
       duration: 2000,
       horizontalPosition: 'center',
-      verticalPosition: 'top'
-    })
+      verticalPosition: 'top',
+    });
   }
   submit() {
     let cred = {
       email: this.email,
-      password: this.setpassword.value.password
-    }
-    console.log(cred);
-    this.authService.setBankPassword(cred)
-    .subscribe((data: any) => {
-      console.log(data)
-      this.dialogRef.close(data)
-    })
+      password: this.setpassword.value.password,
+    };
+    // console.log(cred);
+	if(this.invokedBy == 'bank') {
+		this.authService.setBankPassword(cred).subscribe((data: any) => {
+			// console.log(data);
+			this.openSnackbar(data.message);
+			setTimeout(() => {
+				this.dialogRef.close(data);
+			}, 2100);
+		});
+	} else {
+		this.authService.setMediaPassword(cred).subscribe((data: any) => {
+			// console.log(data);
+			this.openSnackbar(data.message);
+			setTimeout(() => {
+				this.dialogRef.close(data);
+			}, 2100);
+		});
+	}
   }
 }

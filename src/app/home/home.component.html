@@ -1,6 +1,16 @@
 <div class="container">
     <div class="buttons">
-        <button (click)="openBank()">Bank</button>
-        <button>Media</button>
+        <mat-card (click)="openBank()">
+            <mat-card-content>
+                <mat-icon>folder_open</mat-icon>
+                <button mat-button >Bank</button>    
+            </mat-card-content>
+        </mat-card>
+        <mat-card  (click)="openMedia()">
+            <mat-card-content>
+                <mat-icon>folder_open</mat-icon>
+                <button mat-button>Media</button>
+            </mat-card-content>
+        </mat-card>      
     </div>
 </div>

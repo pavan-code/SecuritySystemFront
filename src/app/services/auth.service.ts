@@ -36,4 +36,26 @@ export class AuthService {
   checkBankPassword(data: any) {
     return this.http.post(`${this.baseURL}/checkBankPassword`, data, this.httpOptions)
   }
+  
+  didSetMediaPassword(email: string) {
+    return this.http.get(`${this.baseURL}/isMediaLocked?email=${email}`, this.httpOptions)
+  }
+  setMediaPassword(data: any) {
+    return this.http.post(`${this.baseURL}/setMediaPassword`, data, this.httpOptions)
+  }
+  checkMediaPassword(data: any) {
+    return this.http.post(`${this.baseURL}/checkMediaPassword`, data, this.httpOptions)
+  }
+  getBankAccounts(email: string): Observable<any> {
+    return this.http.get<any>(`${this.baseURL}/getBankAccounts?email=${email}`, this.httpOptions);
+  }
+  addBankAccount(data: any): Observable<any> {
+    return this.http.post(`${this.baseURL}/addBankAccount`, data, this.httpOptions)
+  }
+  deleteAccount(id: number): Observable<any> {
+    return this.http.delete(`${this.baseURL}/deleteAccount?id=${id}`, this.httpOptions);
+  }
+  updateAccount(data: any): Observable<any> {
+    return this.http.post(`${this.baseURL}/updateAccount`, data, this.httpOptions)
+  }
 }
