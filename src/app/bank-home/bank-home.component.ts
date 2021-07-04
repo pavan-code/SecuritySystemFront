@@ -25,7 +25,7 @@ export class BankHomeComponent implements OnInit, OnDestroy {
   ]
   ngOnInit(): void {
     this.email = JSON.parse(localStorage.getItem('user') || '{}').email;
-      this.authService.getBankAccounts(this.email)
+      this.authService.getBankAccountsByEmail(this.email)
       .subscribe((data: any) => {
         this.hide = false;
         // console.log(data);

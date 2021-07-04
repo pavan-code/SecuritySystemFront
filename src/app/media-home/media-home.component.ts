@@ -14,5 +14,5 @@ export class MediaHomeComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     localStorage.setItem('bankopen', 'false')
   }
-
+ 
 }

@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class AuthService {
+ 
   constructor(private http: HttpClient) {}
 
   httpOptions = {
@@ -49,6 +50,9 @@ export class AuthService {
   getBankAccounts(email: string): Observable<any> {
     return this.http.get<any>(`${this.baseURL}/getBankAccounts?email=${email}`, this.httpOptions);
   }
+  getBankAccountsByEmail(email: string) {
+    return this.http.get<any>(`${this.baseURL}/getBankAccountsByEmail?email=${email}`, this.httpOptions);
+  }
   addBankAccount(data: any): Observable<any> {
     return this.http.post(`${this.baseURL}/addBankAccount`, data, this.httpOptions)
   }
@@ -57,5 +61,11 @@ export class AuthService {
   }
   updateAccount(data: any): Observable<any> {
     return this.http.post(`${this.baseURL}/updateAccount`, data, this.httpOptions)
+  }
+  uploadMedia(data: any) {
+    return this.http.post(`${this.baseURL}/uploadMedia`, data, this.httpOptions)
+  }
+  getImages(email: string, type: string) {
+    return this.http.get(`${this.baseURL}/getMediaImages?email=${email}&type=${type}`, this.httpOptions)
   }
 }

@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="upload">
+    <input
+      type="file"
+      (change)="fileChanged($event)"
+      #fileUpload
+      accept="image/*"
+      hidden="true"
+    />    
+    <button mat-button (click)="openDialog()">Upload</button>
+  </div>
+  <div class="images">
+      <div *ngFor = "let img of images">          
+        <img src="{{img.data}}" alt="" width="150px" height="auto">
+      </div>
+  </div>
+</div>

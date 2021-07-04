@@ -1,3 +1,6 @@
+import { VideoComponent } from './video/video.component';
+import { AudioComponent } from './audio/audio.component';
+import { ImagesComponent } from './images/images.component';
 import { MediaHomeComponent } from './media-home/media-home.component';
 import { MediaGuard } from './guards/media.guard';
 import { BankHomeComponent } from './bank-home/bank-home.component';
@@ -15,7 +18,12 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'bank-home', component: BankHomeComponent, canActivate: [BankGuard] },
-  { path: 'media-home', component: MediaHomeComponent, canActivate: [MediaGuard] }
+  { path: 'media-home', component: MediaHomeComponent, canActivate: [MediaGuard] },
+    
+      { path: 'media-home/images', component: ImagesComponent, canActivate: [MediaGuard] },
+      { path: 'media-home/audios', component: AudioComponent, canActivate: [MediaGuard] },
+      { path: 'media-home/videos', component: VideoComponent, canActivate: [MediaGuard] }
+    
 ];
 
 @NgModule({
