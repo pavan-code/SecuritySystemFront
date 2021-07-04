@@ -1,0 +1,21 @@
+mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
+    img {
+        max-height: 400px;
+    }
+}
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.spin {
+    text-align: center;
+    font-size: large;
+    mat-spinner {
+        margin: 5px auto;
+    }
+}

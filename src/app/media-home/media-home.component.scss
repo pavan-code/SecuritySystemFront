@@ -1,0 +1,30 @@
+mat-card-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+    mat-icon {
+        font-size: 100px;       
+        height: 100px;
+        width: 100px;
+    }
+   
+}
+.buttons {
+    mat-card {
+        cursor: pointer;
+        margin: 10px;
+    }
+    display: flex;
+    flex-direction: row;
+}
+@media screen and (max-width: 500px) {
+    .buttons {
+        display: flex;
+        flex-direction: column;
+        mat-icon {
+            font-size: 70px;
+            height: auto;
+        }
+    }
+}

@@ -40,6 +40,10 @@ import { SetPasswordDialogComponent } from './set-password-dialog/set-password-d
 import { BankHomeComponent } from './bank-home/bank-home.component';
 import { MediaHomeComponent } from './media-home/media-home.component';
 import { AddBankAccountComponent } from './add-bank-account/add-bank-account.component';
+import { ImagesComponent } from './images/images.component';
+import { AudioComponent } from './audio/audio.component';
+import { VideoComponent } from './video/video.component';
+import { UploadDialogComponent } from './upload-dialog/upload-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,10 @@ import { AddBankAccountComponent } from './add-bank-account/add-bank-account.com
     BankHomeComponent,
     MediaHomeComponent,
     AddBankAccountComponent,
+    ImagesComponent,
+    AudioComponent,
+    VideoComponent,
+    UploadDialogComponent,
   ],
   imports: [
     BrowserModule,

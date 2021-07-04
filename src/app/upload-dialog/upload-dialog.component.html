@@ -1,0 +1,29 @@
+<div class="content" *ngIf="!hide">
+  <h2 mat-dialog-title>Select Image to upload</h2>
+  <mat-dialog-content>
+    <button mat-stroked-button (click)="fileUpload.click()">
+      Choose image
+    </button>
+    <input
+      type="file"
+      (change)="fileChanged($event)"
+      #fileUpload
+      accept="image/*"
+      hidden="true"
+    />
+    <img *ngIf="file" src="{{ file }}" width="100%" height="auto" alt="" />
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <div class="buttons">
+      <button mat-dialog-close mat-button>close</button>
+      <button *ngIf="file" mat-raised-button color="primary" (click)="upload()">
+        Upload
+      </button>
+    </div>
+  </mat-dialog-actions>
+</div>
+<div class="spin" *ngIf = "hide">
+    <mat-spinner diameter='100' strokeWidth='4'></mat-spinner>
+    <br>
+    <p>Uploading image..</p>
+</div>
